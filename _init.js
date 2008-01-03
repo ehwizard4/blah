@@ -13,9 +13,9 @@ function allowed( req , res , uri ){
     
     user = Auth.getUser( req );
     if ( user == null )
-        return Auth.reject( res );
+        return Auth.reject( req , res );
 	
     if ( ! user.isAdmin() )
-        return Auth.reject( res );
+        return Auth.reject( req , res );
 }
 

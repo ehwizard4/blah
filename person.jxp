@@ -1,0 +1,63 @@
+<% jxp.internal.pieces.header(); %>
+
+<h3>Person Edit</h3>
+
+<%
+    var person = null;
+if ( request._id ){
+    person = db.people.findOne( { _id : request._id } );
+}
+if ( ! person )
+    person = {};
+
+core.content.forms();
+Forms.fillInObject( "" , person );
+
+print.setFormObject( person );
+
+db.people.save( person );
+
+%>
+    <form>
+	
+	<input type="hidden" name="_id">
+
+	<table>
+
+	   <tr>
+	      <th>Company</th>
+	      <td><input name="company"></td>
+	   </tr>
+
+	   <tr>
+	      <th>First</th>
+	      <td><input name="first"></td>
+	   </tr>
+
+	   <tr>
+	      <th>Last</th>
+	      <td><input name="last"></td>
+	   </tr>
+
+	   <tr>
+	      <th>Email</th>
+	      <td><input name="email"></td>
+	   </tr>
+
+	   <tr>
+	      <th>Office</th>
+	      <td><input name="office"></td>
+	   </tr>
+
+	   <tr>
+	      <th>Cell</th>
+	      <td><input name="cell"></td>
+	   </tr>
+
+
+	</table>
+	<input type="submit" value="save">
+	</form>
+
+
+<% jxp.internal.pieces.footer(); %>

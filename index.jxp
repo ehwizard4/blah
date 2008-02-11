@@ -1,5 +1,17 @@
-<html>
+<html><head>10gen sample apps</head>
     <body>
-	<%= "Hello World" %>
+Welcome to the 10gen sample apps pages.
+
+<%
+    var n = db.nLoads.findOne() || { count: 0 };
+    n.count++;
+    db.nLoads.save(n);
+%>
+<p>
+You can view the source code for the samples via the documentation tool, 
+<a href="http://samples.10gen.com/admin/doc?f=/">click here.</a>
+<p>
+This page has been loaded <%= n.count.toFixed(0) %> times.
+
     </body>
 </html>

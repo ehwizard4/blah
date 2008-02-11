@@ -1,0 +1,41 @@
+<% jxp.pieces.header(); %>
+
+<h3>Phone Book</h3>
+<a href="person.jxp">Add Person</a>
+
+<%
+    
+    if ( request.action == "Delete" ){
+	print( "<br>deleting : " + request._id );
+	db.people.remove( { _id : request._id } );
+
+	print( "<br>" );
+    }
+
+    db.people.ensureIndex( { last : 1 } );
+
+    core.content.table();
+var tempActions = [];
+if ( user || request._d == "1" )
+    tempActions.push( { name : "Delete" } );
+
+    var tab = new htmltable( 
+     {
+	 ns : db.people ,
+	 cols : [ 
+		 { name : "last" } ,
+		 { name : "first" } ,
+		 { name : "email" } ,
+		 { name : "office" } ,
+		 { name : "cell" }  ,
+		 { name : "company" } 
+		 ] ,
+	     detailUrl : "/internal/person.jxp?_id=" , 
+	     searchable : true ,
+	     actions : tempActions
+	     }
+     );
+tab.dbview( tab.find().sort( { last : 1 } ) );
+%>
+
+<% jxp.pieces.footer(); %>

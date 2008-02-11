@@ -1,17 +1,19 @@
-<html><head>10gen sample apps</head>
-    <body>
-Welcome to the 10gen sample apps pages.
+<html><head><title>10gen sample apps</title></head>
+<body>
+<h2>10gen sample apps pages.</h2>
 
 <%
+    // get and increment counter
     var n = db.nLoads.findOne() || { count: 0 };
     n.count++;
     db.nLoads.save(n);
 %>
 <p>
-You can view the source code for the samples via the documentation tool, 
-<a href="http://samples.10gen.com/admin/doc?f=/">click here.</a>
-<p>
-This page has been loaded <%= n.count.toFixed(0) %> times.
-
-    </body>
+You can view the source code for the samples via the 
+<a href="http://samples.10gen.com/admin/doc?f=/">documentation tool.</a>
+<h3>DB Counter</h3>
+This page has been loaded <%= n.count.toFixed(0) %> times. <a href="/admin/doc?f=/index.jxp">[code]</a>
+<h3>Table Example</h3>
+<a href="phonebook">Phone Book Example</a>
+</body>
 </html>

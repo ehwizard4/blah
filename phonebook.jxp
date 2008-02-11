@@ -1,6 +1,6 @@
 <% jxp.pieces.header(); %>
 
-<h3>Phone Book</h3>
+<h3>Phone Book <a href="/admin/doc?f=/phonebook.jxp">[code]</a></h3>
 <a href="person.jxp">Add Person</a>
 
 <%
@@ -14,10 +14,12 @@
 
     db.people.ensureIndex( { last : 1 } );
 
+    // include the table helper module from the core libraries
     core.content.table();
-var tempActions = [];
-if ( user || request._d == "1" )
-    tempActions.push( { name : "Delete" } );
+
+    var tempActions = [];
+    if ( user || request._d == "1" )
+        tempActions.push( { name : "Delete" } );
 
     var tab = new htmltable( 
      {
@@ -30,12 +32,12 @@ if ( user || request._d == "1" )
 		 { name : "cell" }  ,
 		 { name : "company" } 
 		 ] ,
-	     detailUrl : "/internal/person.jxp?_id=" , 
+	     detailUrl : "person.jxp?_id=" , 
 	     searchable : true ,
 	     actions : tempActions
 	     }
      );
-tab.dbview( tab.find().sort( { last : 1 } ) );
+    tab.dbview( tab.find().sort( { last : 1 } ) );
 %>
 
 <% jxp.pieces.footer(); %>

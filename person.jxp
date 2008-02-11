@@ -1,7 +1,8 @@
-<% jxp.internal.pieces.header(); %>
+<% jxp.pieces.header(); %>
 
-<h3>Person Edit</h3>
+<h3>Person Edit <a href="/admin/doc?f=/person.jxp">[code]</a></h3>
 
+<a href="phonebook">Phone Book</a><p>
 <%
     var person = null;
 if ( request._id ){
@@ -60,4 +61,4 @@ db.people.save( person );
 	</form>
 
 
-<% jxp.internal.pieces.footer(); %>
+<% jxp.pieces.footer(); %>

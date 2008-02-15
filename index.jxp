@@ -1,6 +1,10 @@
 <html><head><title>10gen sample apps</title></head>
 <body>
 <h2>10gen sample apps pages.</h2>
+<h3>Simple</h3>
+  <ul>
+    <li><a href="/lists">list display</a></li>
+  </ul>
 
 <%
     // get and increment counter

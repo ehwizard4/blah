@@ -61,6 +61,13 @@ function reloadDiv(response) {
 </script>
 
 <h3>Todo List</h3>
+Code for:<ul>
+<li><a href="doc?f=/todo.jxp">this page</a></li>
+<li><a href="doc?f=/addTask.jxp">adding a task</a></li>
+<li><a href="doc?f=/doneTask.jxp">marking a task as done</a></li>
+<li><a href="doc?f=/todoTable.jxp">generating the todo list</a></li>
+
+</ul>
 
 <fieldset>
 <legend>Add a task</legend>

@@ -62,19 +62,17 @@ function reloadDiv(response) {
 
 <h3>Todo List</h3>
 Code for:<ul>
-<li><a href="doc?f=/todo.jxp">this page</a></li>
-<li><a href="doc?f=/addTask.jxp">adding a task</a></li>
-<li><a href="doc?f=/doneTask.jxp">marking a task as done</a></li>
-<li><a href="doc?f=/todoTable.jxp">generating the todo list</a></li>
+<li><a href="admin/doc?f=/todo.jxp">this page</a></li>
+<li><a href="admin/doc?f=/addTask.jxp">adding a task</a></li>
+<li><a href="admin/doc?f=/doneTask.jxp">marking a task as done</a></li>
+<li><a href="admin/doc?f=/todoTable.jxp">generating the todo list</a></li>
 
 </ul>
 
 <fieldset>
 <legend>Add a task</legend>
-    <form method="POST" action="addTask.jxp">
       <td><input name="desc" id="desc"></td>
       <td><input type="button" value="save" onclick="sendDesc()"></td>
-    </form>
 </fieldset>
 <div id="trailing_div">
 

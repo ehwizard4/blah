@@ -1,0 +1,25 @@
+<%
+// Adds an item to the todo list
+
+if(!request.desc) {
+%>
+	You must fill in the description.
+<%
+}
+else {
+
+     // initialize a new task
+     var task = {};
+
+     // fill in date and status
+     // for some reason, array.length returns a float
+     task['id'] = Math.floor(db.todo.find().toArray().length);
+     task['desc'] = request.desc;
+     task['date'] = Date();
+     task['done'] = false;
+
+     db.todo.save( task );
+
+     jxp.todoTable();
+}
+ %>

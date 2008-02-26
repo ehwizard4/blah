@@ -1,0 +1,28 @@
+<%
+// Update a field when a task has been done
+// note that there is no field update command, you find an element, change it, and save it, and the database keeps track that it's the same element
+
+if(!request.id) 
+	return;
+
+// this is kind of hacky, going through every element in the table.
+// since the ids are stored as floats, it couldn't find the element using find( { id : request.id } )
+
+var cursor = db.todo.find();
+while(cursor.hasNext()) {
+	elem = cursor.next();
+
+	// if the ids are the same, this is the element we want to update
+	if(elem.id == request.id)
+	 	  break;
+
+	log(elem.id +" != "+request.id);
+}
+
+elem.done = true;
+db.todo.save(elem);
+
+// return the updated table
+jxp.todoTable();
+
+%>

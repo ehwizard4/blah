@@ -1,0 +1,34 @@
+
+<table>
+<tr><th>Complete</th><th>Date/Time</th><th>Description</th></tr>
+
+<%
+// Generates a table from the database db.todo, ignoring done items
+
+var cursor = db.todo.find().sort( { date : -1 } );
+
+while(cursor.hasNext()) {
+	current = cursor.next();
+
+	// if the item has already been done, skip it
+	// in retrospect, a more efficient way of doing this would be saying "db.todo.find( { done : false } )"
+	// on line 8
+	if(current.done)
+		continue;
+
+	// hack, as the database is storing ids as floats
+	id = Math.floor(current.id);
+
+	%>
+
+	<tr id="tr<%= id %>">
+	<td><input type="checkbox" id="checkbox<%= id %>" onclick="makeDone(<%= id %>)"></td>
+	<td><%= current.date %></td>
+	<td><%= current.desc %></td>
+	</tr>
+
+<%
+}
+%>
+
+</table>

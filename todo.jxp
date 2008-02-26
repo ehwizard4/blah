@@ -1,0 +1,80 @@
+<% jxp.pieces.header(); %>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="todo.css">
+
+<script type="text/javascript">
+
+// generic ajax function
+function ajax(passData, to, responseFunc) {
+	 var xmlhttp = null;
+ 	 try {
+	   xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+	 } catch (e) {
+	   try {
+	      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	   } catch (E) {
+	      xmlhttp = false;
+  	   }
+        }
+	if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+	   try {
+	          xmlhttp = new XMLHttpRequest();
+	   } catch (e) {
+       	     	  xmlhttp=false;
+	   }
+	}
+	if (!xmlhttp && window.createRequest) {
+	   try {
+	          xmlhttp = window.createRequest();
+           } catch (e) {
+    	      	 xmlhttp=false;
+	   }
+       }
+
+       xmlhttp.open("POST", to, true);
+       xmlhttp.onreadystatechange=function() {
+         if (xmlhttp.readyState==4) {
+	    responseFunc(xmlhttp.responseText);
+	 }
+       }
+       xmlhttp.send(passData);
+}
+
+function sendDesc() {
+	 passData = "desc="+document.getElementById("desc").value;
+	 ajax(passData, "addTask.jxp", reloadDiv);
+}
+
+function makeDone(i) {
+	 document.getElementById("tr"+i).style.colorx="#DDDDDD";
+	 ajax("id="+i, "doneTask.jxp", reloadDiv);
+}
+
+function reloadDiv(response) {
+	 trailer = document.getElementById("trailing_div");
+	 description = document.getElementById("desc");
+	 trailer.innerHTML = response;
+	 description.value = "";
+}
+
+</script>
+
+<h3>Todo List</h3>
+
+<fieldset>
+<legend>Add a task</legend>
+    <form method="POST" action="addTask.jxp">
+      <td><input name="desc" id="desc"></td>
+      <td><input type="button" value="save" onclick="sendDesc()"></td>
+    </form>
+</fieldset>
+<div id="trailing_div">
+
+<%
+// use the local script, todoTable.jxp, to generate the table
+jxp.todoTable();
+%>
+
+</div>
+<% jxp.pieces.footer(); %>

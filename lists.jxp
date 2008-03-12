@@ -1,0 +1,35 @@
+<html>
+  <body>
+
+<h3>Lists <a href="/admin/doc?f=/lists.jxp">[code]</a></h3>
+
+<%
+
+var theList = [
+    { name : "ShopWiki" , link : "http://www.shopwiki.com/" } ,
+    { name : "AlleyInsider" , link : "http://www.alleyinsider.com/" } ,
+    { name : "Slashdot" , link : "http://www.slashdot.org/" } 
+
+];
+
+%>
+
+<h3>Each element in its own div</h3>
+<% theList.forEach( jxp.pieces.simpleList1 ); %>
+<hr>
+
+<h3>Tables</h3>
+<table border="1">
+<% theList.forEach( jxp.pieces.simpleList2 ); %>
+</table>
+<hr>
+
+<h3>List Elements</h3>
+<ul>
+<% theList.forEach( jxp.pieces.simpleList3 ); %>
+</ul>
+<hr>
+
+
+  </body>
+</html>

@@ -1,0 +1,9 @@
+<html><body>
+Simple example of logging / auditing user ip addresses in the db.
+<p>
+<a href="/">Home</a><p>
+<a href="http://samples.10gen.com/admin/doc?f=/accesses.jxp">Code</a>
+<p>
+<hr>
+<% jxp.access(); %>
+</body></html>

@@ -1,0 +1,9 @@
+<%
+ip=request.getRemoteIP();
+x=db.recent.findOne({ip:ip});
+if( !x )
+    x={ip:ip};
+x.when = Date();
+x.ua = request.getHeader("User-Agent");
+db.recent.save(x);
+%>

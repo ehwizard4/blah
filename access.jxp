@@ -1,0 +1,9 @@
+<% jxp.touch(); %>
+<h2>Accesses by ip:</h2>
+<%
+db.recent.ensureIndex({when:1});
+db.recent.find().sort({when:-1}).limit(6).forEach( function(x) { print("<b>" + x.ip + "</b> " + x.when + " " + x.ua + "<br>\n"); } );
+%>
+<p>
+Your ip is <%=request.getRemoteIP()%>
+<br>

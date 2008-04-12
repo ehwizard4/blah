@@ -1,0 +1,10 @@
+<html>
+  <body>
+
+   <h3>Cache Example</h3>
+   <b>this value will only change once every 5 seconds</b>
+   <br>
+   <% local.cache.thing.cache( 1000 * 5 ); %>
+
+  </body>
+</html>

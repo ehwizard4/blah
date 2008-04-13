@@ -4,7 +4,8 @@
 <h3>Simple</h3>
   <ul>
     <li><a href="/lists">list display</a></li>
-    <li><a href="/accesses">accesses</a></li>
+    <li><a href="/accesses">access log</a></li>
+    <li><a href="/cache">jxp fragment caching</a>
   </ul>
 
 You can view the source code for the samples via the 
@@ -14,18 +15,18 @@ You can view the source code for the samples via the
 
 <h3>DB Counter</h3>
 <%
-    // get and increment counter
+    // get and increment counter.
     var n = db.nLoads.findOne() || { count: 0 };
     n.count++;
     db.nLoads.save(n);
 %>
 This page has been loaded <%= n.count.toFixed(0) %> times. <a href="/admin/doc?f=/index.jxp">[code]</a>
 
-
 <h3>Table Examples</h3>
 <ul>
 <li><a href="phonebook">Phone Book Example</a></li>
 <li><a href="todo.jxp">Todo List</a></li>
+</ul>
 
 </body>
 </html>

@@ -6,9 +6,10 @@
     <li><a href="/lists">list display</a></li>
     <li><a href="/accesses">access log</a></li>
     <li><a href="/cache">jxp fragment caching</a>
+    <li><a href="/blog/">sample blog</a></li>
   </ul>
 
-You can view the source code for the samples via the 
+You can view the source code for the samples via the
 <a href="http://samples.10gen.com/admin/doc?f=/">documentation tool.</a>
 
 <p>

@@ -1,0 +1,38 @@
+<%
+/*  Adapted from Structure and Interpretation of Computer Programs
+    Abelson/Sussman/Sussman section 4.3.2
+*/
+
+core.util.array();
+core.util.number();
+core.util.amb();
+
+res =  [1,2,3,4,5].amb( function(baker) {
+return [1,2,3,4,5].amb( function(cooper) {
+return [1,2,3,4,5].amb( function(fletcher) {
+return [1,2,3,4,5].amb( function(miller) {
+return [1,2,3,4,5].amb( function(smith) {
+
+    require( [baker, cooper, fletcher, miller, smith].distinct() );
+    require( baker != 5 );
+    require( cooper != 1 );
+    require( fletcher != 5 && fletcher != 1 );
+    require( miller > cooper );
+    require( abs(smith-fletcher) != 1 );
+    require( abs(fletcher-cooper) != 1 );
+
+    return [['baker',baker],
+	    ['cooper',cooper],
+	    ['fletcher',fletcher],
+	    ['miller',miller],
+	    ['smith',smith]];
+
+})})})})});
+
+%>
+
+<%= res %>
+
+<p>
+
+<a href="/admin/doc?f=/ambexample.jxp&expand=1">[code]</a>

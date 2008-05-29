@@ -6,7 +6,6 @@
     <li><a href="/lists">list display</a></li>
     <li><a href="/accesses">access log</a></li>
     <li><a href="/caching">jxp fragment caching</a>
-    <li><a href="/blog/">sample blog</a></li>
   </ul>
 
 You can view the source code for the samples via the

@@ -1,0 +1,81 @@
+<html><body>
+<h1>Database Objects Example 2</h1>
+<a href="/admin/doc?f=/objects2.jxp">[Code]</a>
+
+<%
+Course = function(name) { 
+   this.name = name || "name not set";
+}
+Course.prototype.toString = function() { return 'Course ' + this.name; }
+
+Address = function(s,c,st,pc) { 
+   this.street = s||"";
+   this.city = c||"";
+   this.state = st||"";
+   this.postalCode = pc||"";
+}
+Address.prototype.toString = function() { 
+   return this.street + '\n' + this.city + ', ' + 
+     this.state + ' ' + this.postalCode;
+}
+
+// grade for a class
+Score = function(course,grd) { 
+   this.for_course = course; // course
+   this.grade = grd || 0.0;
+}
+Score.prototype.toString = function() { 
+   return this.for_course.toString() + ': ' + this.grade;
+}
+Score.prototype.passed = function() { return this.grade >= 2.0; }
+
+Student = function(name) { 
+   this.name = name || "not set";
+   this.address = new Address();
+   this.scores = [];
+   this.scores._dbCons = Score;
+}
+Student.prototype.summary = function() { 
+   var s = this.name + '\n';
+   s += this.address.toString() + '\n';
+   this.scores.forEach( function(score) { s += score.toString() + '\n'; } );
+   return s;
+}
+Student.prototype.addScore = function(course, grade) { 
+   this.scores.push( new Score(course, grade) );
+}
+Student.prototype.__defineGetter__("id", function() { return this._id; });
+Student.prototype.save = function() { db.students.save(this); }
+
+db.courses.setConstructor(Course);
+db.students.setConstructor(Student);
+
+db.courses.remove({});
+db.students.remove({});
+
+{
+    var biology = new Course("Biology");
+    db.courses.save(biology);
+    var english = new Course("English");
+    db.courses.save(english);
+
+    var jane = new Student("Jane");
+    jane.address = new Address("123 Main St.", "New York", "NY", "10014");
+    jane.addScore(biology, 4.0);
+    jane.addScore(english, 3.0);
+    db.students.save(jane);
+}
+%>
+
+<pre>
+<%
+var student = db.students.findOne({name:"Jane"});
+print( student.summary() );
+print("\nid: " + student.id);
+student.notes = "Good student!";
+student.save();
+print("\n\nnotes: " + db.students.findOne().notes);
+%>
+</pre>
+
+</body></html>

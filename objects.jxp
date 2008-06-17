@@ -1,0 +1,35 @@
+<html><body>
+<h1>Database Objects Example</h1>
+<a href="/admin/doc?f=/objects.jxp">[Code]</a>
+
+<%
+db.students.remove({});
+
+Student = function(name) { 
+   this.name = name || "not set";
+   this.grade = 9;
+   this.courses = [];
+}
+
+Student.prototype.summary = function() { 
+   return this.name + ' / ' + this.grade + (this.sports?" (sports)" : "");
+}
+
+db.students.setConstructor(Student);
+
+var jane = new Student("Jane");
+jane.sports = true;
+
+db.students.save(jane);
+
+%>
+
+<p>
+
+<%= db.students.findOne().summary() %>
+
+<p>
+
+<a href="/objects2">objects2 example</a>
+
+</body></html>

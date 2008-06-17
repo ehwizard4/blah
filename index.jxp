@@ -22,6 +22,13 @@ You can view the source code for the samples via the
 %>
 This page has been loaded <%= n.count.toFixed(0) %> times. <a href="/admin/doc?f=/index.jxp&expand=1">[code]</a>
 
+<h3>Database Examples</h3>
+
+<ul>
+<li><a href="/objects">Objects</a></li>
+</ul>
+
+
 <h3>Table Examples</h3>
 <ul>
 <li><a href="phonebook">Phone Book Example</a></li>

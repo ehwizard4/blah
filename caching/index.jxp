@@ -3,7 +3,7 @@
 
    <h3>Cache Example</h3>
    <b>this value will only change once every 5 seconds</b>
-   <a href="/admin/doc?f=/cache/">[code]</a>
+   <a href="/admin/doc?f=/caching/">[code]</a>
    <br>
    <% __path__.thing.cache( 1000 * 5 ); %>
 

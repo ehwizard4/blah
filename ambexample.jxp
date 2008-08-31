@@ -4,7 +4,6 @@
 */
 
 core.util.array();
-core.util.number();
 core.util.amb();
 
 res =  [1,2,3,4,5].amb( function(baker) {
@@ -18,8 +17,8 @@ return [1,2,3,4,5].amb( function(smith) {
     require( cooper != 1 );
     require( fletcher != 5 && fletcher != 1 );
     require( miller > cooper );
-    require( abs(smith-fletcher) != 1 );
-    require( abs(fletcher-cooper) != 1 );
+    require( Math.abs(smith-fletcher) != 1 );
+    require( Math.abs(fletcher-cooper) != 1 );
 
     return [['baker',baker],
 	    ['cooper',cooper],

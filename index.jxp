@@ -18,6 +18,12 @@ See also the <a href="http://www.10gen.com/wiki/DevDocumentation">10gen tutorial
 
 See more at <a href="http://github.com/10gen/sample-php/tree/master">sample-php</a>.
 
+<h2>Ruby Samples</h2>
+<ul>
+<li><a href="/ruby/counter1">counter</a> (counter1.rb)</li>
+<li><a href="/ruby/counter2">counter</a> (counter2.erb)</li>
+</ul>
+
 <h2>Server-Side Javascript Samples</h2>
 <h3>Simple</h3>
   <ul>

@@ -31,7 +31,7 @@ def br; puts "<br/>"; end
 
 h1 "Ruby Implementation Test"
 
-print '<p><a href="/admin/doc?f=/ruby/counter.rb">[code]</a></p>'
+print "<p><a href=\"/admin/doc?f=/ruby/#{File.basename(__FILE__)}\">[code]</a></p>"
 
 h2 "Create Ruby object from JS class def"
 pre {

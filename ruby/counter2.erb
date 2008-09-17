@@ -6,7 +6,7 @@ n['count'] += 1
 $db.nERBPageLoads.save(n)
 %>
 <p>This page has been loaded <%= n['count'].to_i %> times.
-   <a href="/admin/doc?f=/ruby/counter.rb">[code]</a>
+   <a href="/admin/doc?f=/ruby/<%= File.basename(__FILE__) %>">[code]</a>
 </p>
 </body>
 </html>

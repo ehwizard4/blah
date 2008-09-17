@@ -2,13 +2,15 @@
 <body>
 <h1>10gen sample apps pages.</h1>
 
-<h2>Python</h2>
+See also the <a href="http://www.10gen.com/wiki/DevDocumentation">10gen tutorials</a>.
+
+<h2>Python Samples</h2>
 <ul>
 <li><a href="/py/counter">counter</a></li>
 </ul>
 
 
-<h2>Server-Side Javascript</h2>
+<h2>Server-Side Javascript Samples</h2>
 <h3>Simple</h3>
   <ul>
     <li><a href="/lists">list display</a></li>

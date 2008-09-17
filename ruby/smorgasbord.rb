@@ -12,9 +12,9 @@ end
 (1..6).each {|i| eval "def h#{i}(title); header(#{i}, title); end" }
 
 def pre
- puts "<pre>"
+  puts "<pre>"
   yield
- puts "</pre>"
+  puts "</pre>"
 end
 
 def track_table(text=nil)
@@ -36,7 +36,7 @@ print "<p><a href=\"/admin/doc?f=/ruby/#{File.basename(__FILE__)}\">[code]</a></
 h2 "Create Ruby object from JS class def"
 pre {
   f = MyJSClass.new("bar")
-  puts "Object.constants.include?(:MyJSClass) = #{Object.constants.include?(:MyJSClass)}"
+  puts "Object.constants.include?('MyJSClass') = #{Object.constants.include?('MyJSClass')}"
   puts "f is of class #{f.class.name}"
   puts "f.inspect = #{f.inspect}"
   puts "f['moo'].getNumParameters = #{f['moo'].getNumParameters}"

@@ -126,17 +126,6 @@ pre {
   $db.test.find.each { |row| puts h(tojson(row)) }
 }
 
-h4 "Using $where that returns all records"
-pre {
-  $db.test.find({'$where' => Proc.new { true }}).each { |row| puts h(tojson(row)) }
-}
-
-h4 "Using $where that returns XTC"
-pre {
-  puts "<b>oops, this does not work yet</b>"
-  $db.test.find({ :"$where" => Proc.new { |row| puts "HELLO I AM TESTING"; row.artist == 'XTC' }}).each { |row| puts h(tojson(row)) }
-}
-
 h2 "XGen::Mongo::Base"
 
 class Track < XGen::Mongo::Base

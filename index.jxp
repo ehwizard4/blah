@@ -2,6 +2,9 @@
 <body>
 <h1>10gen sample apps pages.</h1>
 
+You can view the source code for the samples via the
+<a href="http://samples.10gen.com/admin/doc?f=/">documentation tool.</a>
+<p>
 See also the <a href="http://www.10gen.com/wiki/DevDocumentation">10gen tutorials</a>.
 
 
@@ -14,9 +17,11 @@ See also the <a href="http://www.10gen.com/wiki/DevDocumentation">10gen tutorial
 <h2>PHP Samples</h2>
 <ul>
 <li><a href="/php/counter">counter</a></li>
+<li>
+See more at <a href="http://github.com/10gen/sample-php/tree/master">sample-php</a>.
+</li>
 </ul>
 
-See more at <a href="http://github.com/10gen/sample-php/tree/master">sample-php</a>.
 
 <h2>Server-Side Javascript Samples</h2>
 <h3>Simple</h3>
@@ -26,12 +31,8 @@ See more at <a href="http://github.com/10gen/sample-php/tree/master">sample-php<
     <li><a href="/caching">jxp fragment caching</a>
   </ul>
 
-You can view the source code for the samples via the
-<a href="http://samples.10gen.com/admin/doc?f=/">documentation tool.</a>
-
-<p>
-
 <h3>DB Counter</h3>
+<ul><li>
 <%
     // get and increment counter.
     var n = db.nLoads.findOne() || { count: 0 };
@@ -39,6 +40,7 @@ You can view the source code for the samples via the
     db.nLoads.save(n);
 %>
 This page has been loaded <%= n.count.toFixed(0) %> times. <a href="/admin/doc?f=/index.jxp&expand=1">[code]</a>
+</li></ul>
 
 <h3>Database Examples</h3>
 

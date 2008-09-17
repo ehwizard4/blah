@@ -1,6 +1,14 @@
 <html><head><title>10gen sample apps</title></head>
 <body>
-<h2>10gen sample apps pages.</h2>
+<h1>10gen sample apps pages.</h1>
+
+<h2>Python</h2>
+<ul>
+<li><a href="/py/counter">counter</a></li>
+</ul>
+
+
+<h2>Server-Side Javascript</h2>
 <h3>Simple</h3>
   <ul>
     <li><a href="/lists">list display</a></li>

@@ -25,8 +25,9 @@ See more at <a href="http://github.com/10gen/sample-php/tree/master">sample-php<
 
 <h2>Ruby Samples</h2>
 <ul>
-<li><a href="/ruby/counter1">counter</a> (counter1.rb)</li>
-<li><a href="/ruby/counter2">counter</a> (counter2.erb)</li>
+<li><a href="/ruby/counter1">counter</a> (Ruby)</li>
+<li><a href="/ruby/counter2">counter</a> (ERB)</li>
+<li><a href="/ruby/smorgasbord">smorgasbord</a></li>
 </ul>
 
 <h2>Server-Side Javascript Samples</h2>

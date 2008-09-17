@@ -4,11 +4,19 @@
 
 See also the <a href="http://www.10gen.com/wiki/DevDocumentation">10gen tutorials</a>.
 
+
 <h2>Python Samples</h2>
 <ul>
 <li><a href="/py/counter">counter</a></li>
 </ul>
 
+
+<h2>PHP Samples</h2>
+<ul>
+<li><a href="/php/counter">counter</a></li>
+</ul>
+
+See more at <a href="http://github.com/10gen/sample-php/tree/master">sample-php</a>.
 
 <h2>Server-Side Javascript Samples</h2>
 <h3>Simple</h3>

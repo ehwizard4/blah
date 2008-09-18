@@ -44,6 +44,11 @@ pre {
   puts "f.moo should be 'rab', it is '#{f.moo()}'"
 }
 
+h3 "tojson JS func called with Ruby object"
+pre {
+  puts tojson(Struct.new(:name, :age).new(:name => 'Jim', :age => 4324))
+}
+
 h2 "Scope print"
 pre {
   $scope.print("Hello, World!")
@@ -144,6 +149,12 @@ class Track < XGen::Mongo::Base
     str
   end
 end
+
+h3 "Testing tojson(pure Ruby object)"
+pre {
+  t = Track.new({:song => 'New Song', :artist => 'New Artist', :album => 'New Album'})
+  puts "tojson(Track.findOne(song_id)) = #{tojson(Track.findOne(song_id))}"
+}
 
 # pre {
 
@@ -275,13 +286,6 @@ h3 "Track.find('bogus_id')"
 pre {
   puts "I should see nothing here; a bogus ID should be trapped and the Ruby code should return nil."
   puts Track.find('bogus_id')
-}
-
-h3 "Create new ivar using method_missing"
-pre {
-  t = Track.new
-  t.foo = 42
-  puts "t.foo, which was just created, = #{t.foo}"
 }
 
 

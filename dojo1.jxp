@@ -1,0 +1,10 @@
+<%
+
+core.util.browser();
+
+external.dojo.current.dojo.dojo();
+external.dojo.current.dojo.regexp();
+
+print( dojo.regexp.escapeString( "abc[123" ) );
+
+%>

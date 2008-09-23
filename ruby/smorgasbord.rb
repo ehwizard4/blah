@@ -46,7 +46,7 @@ pre {
 
 h3 "tojson JS func called with Ruby object"
 pre {
-  puts tojson(Struct.new(:name, :age).new(:name => 'Jim', :age => 4324))
+  puts tojson(Struct.new(:name, :age).new('Jim', 4324))
 }
 
 h2 "Scope print"
@@ -179,6 +179,11 @@ track_table("Track.coll.findOne(song_id)") {
 br
 track_table("Track.findOne(song_id)") {
   puts Track.findOne(song_id).to_tr
+}
+
+br
+track_table("Track.findOne(song_id, {:album => 1}) -- only album field is returned") {
+  puts Track.findOne(song_id, {:album => 1}).to_tr
 }
 
 h3 "Track.find_by_*"

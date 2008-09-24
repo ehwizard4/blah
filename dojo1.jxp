@@ -52,5 +52,8 @@ topics[1] = dojo.subscribe("fullNames", someObject, "bar");
       <small>some examples came from: http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/event-system/publish-and-subscribe-events</small>
     </p>
 
+    <hr>
+    <a href="/">home</a>
+
   </body>
 </html>

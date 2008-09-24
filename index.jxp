@@ -62,6 +62,11 @@ This page has been loaded <%= n.count.toFixed(0) %> times. <a href="/admin/doc?f
 <li><a href="todo.jxp">Todo List</a></li>
 </ul>
 
+<h3>JS Libraries</h3>
+<ul>
+<li><a href="dojo1.jxp">dojo</a></li>
+</ul>
+
 <h3>Fun</h3>
 <ul>
 <li><a href="ambexample">amb</a></li>

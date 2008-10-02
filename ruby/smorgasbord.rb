@@ -1,3 +1,7 @@
+def h(o)
+  o.to_s.gsub(/&/, '&amp;').gsub(/</, '&lt;').gsub(/>/, '&gt;').gsub(/'/, '&apos;').gsub(/"/, '&quot;')
+end
+
 class Object
   def method_missing sym, args
     msg = "method missing: #{sym}; class of self = #{self.class.name}"
@@ -121,20 +125,21 @@ pre {
 
 h3 "Find"
 
-h4 "search for \"Aliens Ate My Buick\""
-pre {
-  $db.test.find({:album => "Aliens Ate My Buick"}).each { |row| puts h(tojson(row)) }
-}
-
 h4 "all records"
 pre {
   $db.test.find.each { |row| puts h(tojson(row)) }
 }
 
+h4 "search for \"Aliens Ate My Buick\""
+pre {
+  $db.test.find({:album => "Aliens Ate My Buick"}).each { |row| puts h(tojson(row)) }
+}
+
 h2 "XGen::Mongo::Base"
 
 class Track < XGen::Mongo::Base
-  set_collection :test, %w(artist album song track)
+  collection_name :test
+  fields :artist, :album, :song, :track
   def to_s
     "artist: #{artist}, album: #{album}, song: #{song}, track: #{track ? track.to_i : nil}"
   end
@@ -182,8 +187,8 @@ track_table("Track.findOne(song_id)") {
 }
 
 br
-track_table("Track.findOne(song_id, {:album => 1}) -- only album field is returned") {
-  puts Track.findOne(song_id, {:album => 1}).to_tr
+track_table("Track.findOne(song_id, :select => :album) -- only album field is returned") {
+  puts Track.findOne(song_id, :select => :album).to_tr
 }
 
 h3 "Track.find_by_*"
@@ -227,19 +232,19 @@ track_table {
   Track.find(:all).each { |t| puts t.to_tr }
 }
 
-h3 "Track.find(:all, {:song => /to/})"
+h3 "Track.find(:all, :conditions => {:song => /to/})"
 track_table {
-  Track.find(:all, {:song => /to/}).each { |row| puts row.to_tr }
+  Track.find(:all, :conditions => {:song => /to/}).each { |row| puts row.to_tr }
 }
 
-h3 "Track.find(:all).limit(2)"
+h3 "Track.find(:all, :limit => 2)"
 track_table {
-  Track.find(:all).limit(2).each { |t| puts t.to_tr }
+  Track.find(:all, :limit => 2).each { |t| puts t.to_tr }
 }
 
-h3 "Track.find({:album => 'Aliens Ate My Buick'})"
+h3 "Track.find(:conditions => {:album => 'Aliens Ate My Buick'})"
 track_table {
-  Track.find({:album => 'Aliens Ate My Buick'}).each { |t| puts t.to_tr }
+  Track.find(:conditions => {:album => 'Aliens Ate My Buick'}).each { |t| puts t.to_tr }
 }
 
 h3 "Track.find(:first)"
@@ -247,12 +252,18 @@ h3 "Track.find(:first)"
 track_table("find first, no search params") { puts Track.find(:first).to_tr }
 
 br
-track_table("find first, track 3") { puts Track.find(:first, {:track => 3}).to_tr }
+track_table("find first, track 3") { puts Track.find(:first, :conditions => {:track => 3}).to_tr }
 
 h3 "Track.find_all_by_album"
 
 track_table("find_all_by_album('Oranges & Lemons')") {
   Track.find_all_by_album('Oranges & Lemons').each { |t| puts t.to_tr }
+}
+
+h3 "Sorting"
+
+track_table("Track.find(:all, :order => 'album desc')") {
+  Track.find(:all, :order => 'album desc').each { |t| puts t.to_tr }
 }
 
 h3 "Track.new"
@@ -272,17 +283,17 @@ track_table {
 
 h3 "Track.find_or_create_by_song"
 
-track_table("find_or_create_by_song(old_info ...)") {
-  puts Track.find_or_create_by_song({:song => 'The Ability to Swing', :artist => 'Thomas Dolby'}).to_tr
+track_table("find_or_create_by_song('The Ability to Swing', :artist => 'ignored because song found')") {
+  puts Track.find_or_create_by_song('The Ability to Swing', :artist => 'ignored because song found').to_tr
 }
 
 br
-track_table("find_or_create_by_song(new_info ...)") {
-  puts Track.find_or_create_by_song({:song => 'New Song', :artist => 'New Artist', :album => 'New Album'}).to_tr
+track_table("find_or_create_by_song('New Song', :artist => 'New Artist', :album => 'New Album')") {
+  puts Track.find_or_create_by_song('New Song', :artist => 'New Artist', :album => 'New Album').to_tr
 }
 
-h3 "Track.find(:first, {:song => 'King For A Day'}).remove"
-t = Track.find(:first, {:song => 'King For A Day'}).remove
+h3 "Track.find(:first, :conditions => {:song => 'King For A Day'}).remove"
+t = Track.find(:first, :conditions => {:song => 'King For A Day'}).remove
 track_table("Track.find(:first, {:song => 'King For A Day'}).remove") {
   Track.find(:all).each { |t| puts t.to_tr }
 }

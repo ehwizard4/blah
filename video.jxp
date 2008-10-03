@@ -1,0 +1,17 @@
+<html>
+
+  <head>
+    <title>Flash Example</title>
+  </head>
+
+  <body>
+
+    <object width='548' height='460' id='flvPlayer'>
+      <param name='allowFullScreen' value='true'>
+      <param name='movie' value='player.swf?movie=video.flv&autoload=off&volume=70'>
+      <embed src='player.swf?movie=video.flv&autoload=off&volume=70' width='548' height='460' allowFullScreen='true' type='application/x-shockwave-flash'>
+    </object>
+    
+  </body>
+
+</html>

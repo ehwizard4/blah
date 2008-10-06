@@ -1,3 +1,5 @@
+require 'xgen/mongo'
+
 def h(o)
   o.to_s.gsub(/&/, '&amp;').gsub(/</, '&lt;').gsub(/>/, '&gt;').gsub(/'/, '&apos;').gsub(/"/, '&quot;')
 end

@@ -8,6 +8,7 @@ core.user.auth();
    site, but keeps the site completely open otherwise.
 */
 function allowed( req , res , uri ){
+    user = Auth.getUser();
 }
 
 /* The following is used by the Ruby smorgasbord example. */

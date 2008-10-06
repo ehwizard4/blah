@@ -105,7 +105,7 @@ pre {
   song_id_obj = $db.test.save({:artist => 'XTC', :album => 'Oranges & Lemons', :song => 'The Mayor Of Simpleton', :track => 2})
   $db.test.save({:artist => 'XTC', :album => 'Oranges & Lemons', :song => 'King For A Day', :track => 3})
   song_id = song_id_obj._id
-  puts "Data created. song_id = #{song_id}. There are #{$db.test.find.length} records in the test collection."
+  puts "Data created. song_id = #{song_id}. There are #{$db.test.find(:all).length} records in the test collection."
 }
 
 h3 "Find One"
@@ -140,9 +140,11 @@ h2 "XGen::Mongo::Base"
 class Track < XGen::Mongo::Base
   collection_name :test
   fields :artist, :album, :song, :track
+
   def to_s
     "artist: #{artist}, album: #{album}, song: #{song}, track: #{track ? track.to_i : nil}"
   end
+
   def to_tr
     str = "<tr>"
     %w(_id artist album song track).each { |s|
@@ -158,22 +160,8 @@ end
 h3 "Testing tojson(pure Ruby object)"
 pre {
   t = Track.new({:song => 'New Song', :artist => 'New Artist', :album => 'New Album'})
-  puts "tojson(Track.findOne(song_id)) = #{tojson(Track.findOne(song_id))}"
+  puts "tojson(Track.find(song_id)) = #{tojson(Track.find(song_id))}"
 }
-
-# pre {
-
-#   $db.test.setConstructor {  }
-
-#   puts "findOne:"
-#   x = $db.test.findOne()
-#   puts "findOne class of returned obj = #{x.class.name}"
-#   puts "_id of x = #{x._id}"
-#   puts "song of x = #{x.song}"
-
-# the old way
-#   Track.init($db.test, %w(artist album song track))
-# }
 
 h3 "Various uses of find"
 
@@ -182,13 +170,13 @@ track_table("Track.coll.findOne(song_id)") {
 }
 
 br
-track_table("Track.findOne(song_id)") {
-  puts Track.findOne(song_id).to_tr
+track_table("Track.find(song_id)") {
+  puts Track.find(song_id).to_tr
 }
 
 br
-track_table("Track.findOne(song_id, :select => :album) -- only album field is returned") {
-  puts Track.findOne(song_id, :select => :album).to_tr
+track_table("Track.find(song_id, :select => :album) -- only album field is returned") {
+  puts Track.find(song_id, :select => :album).to_tr
 }
 
 h3 "Track.find_by_*"
@@ -208,9 +196,9 @@ track_table("track 2") { puts x.to_tr }
 
 br
 x.track = 99
-track_table("after incrementing track") { puts x.to_tr }
+track_table("after setting track to 99") { puts x.to_tr }
 x.save
-puts "saved"
+puts "<em>saved</em>"
 
 br
 track_table("find_by_track(99)") {
@@ -220,11 +208,6 @@ track_table("find_by_track(99)") {
 br
 track_table("find_by_song 'The Mayor Of Simpleton'") {
   puts Track.find_by_song('The Mayor Of Simpleton').to_tr
-}
-
-h3 "Track.find"
-track_table {
-  Track.find.each { |t| puts t.to_tr }
 }
 
 h3 "Track.find(:all)"
@@ -242,9 +225,9 @@ track_table {
   Track.find(:all, :limit => 2).each { |t| puts t.to_tr }
 }
 
-h3 "Track.find(:conditions => {:album => 'Aliens Ate My Buick'})"
+h3 "Track.find(:all, :conditions => {:album => 'Aliens Ate My Buick'})"
 track_table {
-  Track.find(:conditions => {:album => 'Aliens Ate My Buick'}).each { |t| puts t.to_tr }
+  Track.find(:all, :conditions => {:album => 'Aliens Ate My Buick'}).each { |t| puts t.to_tr }
 }
 
 h3 "Track.find(:first)"

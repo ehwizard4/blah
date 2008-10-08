@@ -1,5 +1,6 @@
 require 'xgen/mongo'
 
+# A convenience method that escapes text for HTML.
 def h(o)
   o.to_s.gsub(/&/, '&amp;').gsub(/</, '&lt;').gsub(/>/, '&gt;').gsub(/'/, '&apos;').gsub(/"/, '&quot;')
 end
@@ -104,9 +105,9 @@ pre {
   $db.test.save({:artist => 'Thomas Dolby', :album => 'Aliens Ate My Buick', :song => 'Budapest by Blimp'})
   $db.test.save({:artist => 'Thomas Dolby', :album => 'The Golden Age of Wireless', :song => 'Europa and the Pirate Twins'})
   $db.test.save({:artist => 'XTC', :album => 'Oranges & Lemons', :song => 'Garden Of Earthly Delights', :track => 1})
-  song_id_obj = $db.test.save({:artist => 'XTC', :album => 'Oranges & Lemons', :song => 'The Mayor Of Simpleton', :track => 2})
+  track_jsobj = $db.test.save({:artist => 'XTC', :album => 'Oranges & Lemons', :song => 'The Mayor Of Simpleton', :track => 2})
   $db.test.save({:artist => 'XTC', :album => 'Oranges & Lemons', :song => 'King For A Day', :track => 3})
-  song_id = song_id_obj._id
+  song_id = track_jsobj._id.to_s
   puts "Data created. song_id = #{song_id}. There are #{$db.test.find(:all).length} records in the test collection."
 }
 

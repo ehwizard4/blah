@@ -46,6 +46,7 @@ This page has been loaded <%= n.count.toFixed(0) %> times. <a href="/admin/doc?f
 
 <ul>
 <li><a href="/objects">Objects</a></li>
+<li><a href="/quicklinks">Quicklinks</a></li>
 </ul>
 
 

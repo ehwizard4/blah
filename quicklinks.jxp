@@ -1,0 +1,82 @@
+<html><body>
+<div>
+The example below is simple entry of a set of links, shown in reverse chronological order.  Only the 
+most recent 10 links are shown.
+<p>
+This example uses the database's fixed sized collections to maintain order (search "$natural" or "capped" in the documentation).
+</div>
+<p>
+<div>
+<a href="/admin/doc?f=/quicklinks.jxp&expand=1">[code]</a>
+</div>
+<p>
+<hr>
+<div>
+
+<% 
+
+// db.quicklinks is the db store which is a fixed size auto ordering collection
+
+var iAmAdmin = true; // for demo purposes, anyone is an admin.  // user && user.isAdmin();
+
+if( iAmAdmin ) {
+
+    var qlt = request.getPostParameter("ql_title");
+    var qlu = request.getPostParameter("ql_url");
+
+    var dql = request.delquicklink;
+    if( request.delquicklink ) { 
+	var ql = db.quicklinks.findOne({_id:request.delquicklink});
+	if( ql ) { 
+            /* on a capped collection, deletes are not permitted, so we simply mark inactive. */
+	    ql.active = false;
+	    db.quicklinks.save(ql);
+	    print("deleted: " + ql.title + "<br>\n");
+	}
+	else { 
+	    print("item to delete not found?<br>");
+	}
+    }
+
+    if( qlt && qlu ) {
+	if( qlt.length < 3 ) 
+	    print("bad title?<br>");
+	else if( !qlu.match(/^http:\/\//) ) { 
+	    print("bad url? (no http://) " + qlu + "<p>");
+	}
+	else { 
+	    db.quicklinks.save({title:qlt,url:qlu,ts:new Date(),active:true});
+	    print("New quicklink added<br>");
+	}
+    }
+}
+
+// output the quicklinks, most recent 10
+db.quicklinks.find({active:true},{title:1,url:1}).sort({natural:-1}).limit(10).
+  forEach( 
+
+    function(L) { 
+	print('<a href="' + L.url + '">');
+	print(L.title);
+	print('</a>');
+	if( iAmAdmin ) {
+	    print(' <a href="?delquicklink=' + L._id + '">x</a>');
+	}
+	print('<br>\n');
+    }
+
+  );
+
+if( iAmAdmin ) {
+%>
+<p>
+<form method="post"><font size="-1">
+new text: <input type="text" name="ql_title" size="24">
+<input type="submit" value="add">
+<br>
+url: <input type="text" name="ql_url" size="34"> 
+</font></form>
+<br>
+<% } %>
+
+</div>

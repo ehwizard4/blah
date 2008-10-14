@@ -11,5 +11,19 @@ db.createCollection('quicklinks', { size: 128 * 1024, capped: true });
    site, but keeps the site completely open otherwise.
 */
 function allowed( req , res , uri ){
+    user = Auth.getUser();
 }
 
+/* The following is used by the Ruby smorgasbord example. */
+
+data = {};
+data.count = 0;
+data.func = function() { return 666; }
+data.plus_seven = function(i) { return i + 7; }
+
+MyJSClass = function(foo) {
+  this.foo = foo;
+}
+MyJSClass.prototype.moo = function() {
+  return this.foo.reverse();
+}

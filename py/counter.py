@@ -1,3 +1,5 @@
+from _10gen import db
+
 n=db.nPyPageLoads.findOne() or {'count':0}
 n['count'] = n['count'] + 1
 db.nPyPageLoads.save(n)

@@ -1,0 +1,67 @@
+<%
+
+    core.media.video();
+
+var videoId = request.id;
+if ( videoId ){
+    videoId = ObjectId( videoId );
+    var f = db._files.findOne( videoId );
+    var v = new Media.Video( f );
+
+    videoUrl = "/~~/f/" + v.getFLV().filename;
+}
+
+showVideo = videoId;
+
+
+if ( request.action == "Upload Video" ){
+    var theFile = request.getFile( "theFile" );
+    if ( theFile ){
+        db._files.save( theFile );
+        db.videos.save( { video : theFile , ip : request.getRemoteIP() , when : new Date() } );
+    }
+    else {
+        print( "why no video" );
+        print( "<BR>[" + request.getPostData().filenames() + "]" );
+    }
+}
+%>
+<html>
+
+  <head>
+    <title>Flash Example</title>
+  </head>
+
+  <body>
+
+    <div ? ( ! showVideo ) >
+      <h3>Upload a Video</h3>
+      <form method="POST" enctype="multipart/form-data" >
+        <input type="hidden" name="MAX_FILE_SIZE" value="<%= 1024 * 1024 * 50 %>" />
+        Choose a file to upload: <input name="theFile" id="theFile" type="file" />
+        <input name="action" type="submit" value="Upload Video" />
+      </form>
+      
+      <table>
+        <forarray v db.videos.find().toArray()>
+          <tr>
+            <td><a href="/video.jxp?id=<%= v.video._id %>"><%= v.video.filename %></a></td>
+            <td><%= v.ip %></td>
+          </tr>
+        </forarray>
+      </table>
+      
+    </div>
+    
+    <div ? showVideo >
+
+      <object width='548' height='460' id='flvPlayer'>
+        <param name='allowFullScreen' value='true'>
+        <param name='movie' value='/player.swf?movie=<%= videoUrl %>&autoload=off&volume=70'>
+        <embed src='/player.swf?movie=<%= videoUrl %>&autoload=off&volume=70' width='548' height='460' allowFullScreen='true' type='application/x-shockwave-flash'>
+      </object>
+    </div>
+    
+  </body>
+
+</html>

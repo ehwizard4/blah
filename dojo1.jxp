@@ -1,0 +1,59 @@
+<%
+
+
+console = { debug : print };
+
+core.util.browser();
+
+external.dojo.current.dojo.dojo();
+external.dojo.current.dojo.regexp();
+
+function globalGuy(arg) { 
+    console.debug("Global Guy fired with arg " + arg); 
+}
+
+var someObject = {
+    bar: 
+    function(first, second){ 
+        console.debug("Bar fired with first of "+first+" and second of "+second);
+        return 7; 
+    }
+};
+    
+
+topics = [];
+topics[0] = dojo.subscribe("globalEvents", globalGuy);
+topics[1] = dojo.subscribe("fullNames", someObject, "bar");
+
+
+
+%>
+
+<html>
+  <head>
+    <title>Dojo examples</title>
+  </head>
+  <body>
+
+    <h3>RegExp Escape</h3>
+    <div>Should be "abc[123]" actually is "<b><%= dojo.regexp.escapeString( "abc[123]" ) %></b>"</div>
+    
+    
+    <h3>Publish/Subscribe</h3>
+    
+    <% dojo.publish("globalEvents", ["data from an interesting source"]); %><br>
+    <% dojo.publish("fullNames", ["Alex", "Russell"]); %></br>
+
+    <hr>
+    
+    <a href="/admin/doc?f=/dojo1.jxp&expand=1">[code]</a>
+
+    <p>
+      <small>some examples came from: http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/event-system/publish-and-subscribe-events</small>
+    </p>
+
+    <hr>
+    <a href="/">home</a>
+
+  </body>
+</html>
